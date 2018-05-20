@@ -12,11 +12,11 @@ import graphics.Camera;
 
 public class World {
 
-	public static final int WIDTH = 200;
-	public static final int HEIGHT = 20;
-	public static final int LENGTH = 200;
+	public static final int WIDTH = 20;
+	public static final int HEIGHT = 2;
+	public static final int LENGTH = 20;
 
-	public Block[][][] blocks;
+	public Section[][][] sections;
 	public Set<Entity> entities;
 	public Point3 loadedPosition;
 	public Entity lockedTarget;
@@ -25,22 +25,10 @@ public class World {
 		lockedTarget = target;
 		loadedPosition = new Point3(0, 0, 0);
 
-		blocks = new Block[WIDTH][HEIGHT][LENGTH];
+		sections = new Section[WIDTH][HEIGHT][LENGTH];
 
 		entities = new HashSet<Entity>();
 		entities.add(lockedTarget);
-
-		for (int x = 0; x < WIDTH; x++) {
-			// for (int y = 0; y < HEIGHT; y++) {
-			for (int z = 0; z < LENGTH; z++) {
-				blocks[x][0][z] = new Grass();
-			}
-			// }
-		}
-		
-		//blocks[1][1][1] = new Block();
-		//blocks[2][1][1] = new Block();
-		//blocks[1][1][2] = new Block();
 		
 		generateTerrain();
 		//DungeonGenerator.generate2D(this, WIDTH, 2, LENGTH, 5);
@@ -68,18 +56,12 @@ public class World {
 		return arr;
 	}
 	
-	public Block getBlock(int x, int y, int z, Camera.Direction dir) {
+	public Block getBlock(int x, int y, int z) {
 		if (x < 0 || y < 0 || z < 0 ||
 			x >= WIDTH || y >= HEIGHT || z >= LENGTH) {
 				return null;
 		}
-		switch (dir) {
-		case NORTH: return blocks[x][y][z];
-		case EAST: return blocks[z][y][x];
-		case SOUTH: return blocks[x][y][LENGTH-1-z];
-		case WEST: return blocks[z][y][x];
-		default: return blocks[WIDTH-1-x][y][z];
-		}
+		Section s = sections[(int) loadedPosition.x][(int) loadedPosition.y][(int) loadedPosition.z];
 	}
 
 	private void generateTerrain() {
@@ -101,104 +83,9 @@ public class World {
 		handleSectionLoad();
 	}
 	
-	private void handleSectionLoad() {
-		int minX = WIDTH/2 - Section.WIDTH/2;
-		int maxX = WIDTH/2 + Section.WIDTH/2;
-		int minY = HEIGHT/2 - Section.HEIGHT/2;
-		int maxY = HEIGHT/2 + Section.HEIGHT/2;
-		int minZ = LENGTH/2 - Section.LENGTH/2;
-		int maxZ = LENGTH/2 + Section.LENGTH/2;
-		
-		if (lockedTarget.position.x - loadedPosition.x < minX) {
-			loadedPosition.x -= Section.WIDTH;
-			loadSectionLeft();
-			System.out.println("loading left");
-		}
-		if (lockedTarget.position.x - loadedPosition.x > maxX) {
-			loadedPosition.x += Section.WIDTH;
-			loadSectionRight();
-		}
-		if (lockedTarget.position.y - loadedPosition.y < minY) {
-			loadedPosition.y -= Section.HEIGHT;
-			loadSectionDown();
-		}	
-		if (lockedTarget.position.y - loadedPosition.y > maxY) {
-			loadedPosition.y += Section.HEIGHT;
-			loadSectionUp();
-		}
-		if (lockedTarget.position.z - loadedPosition.z < minZ) {
-			loadedPosition.z -= Section.LENGTH;
-			loadSectionBack();
-		}
-		if (lockedTarget.position.z - loadedPosition.z > maxZ) {
-			loadedPosition.z += Section.LENGTH;
-			loadSectionFront();
-		}
-	}
 	
-
-	private void loadSectionLeft() {
-		for (int i = 0; i < HEIGHT / Section.HEIGHT; i++) {
-			for (int j = 0; j < LENGTH / Section.LENGTH; j++) {
-				//Section.save(subsection(WIDTH-Section.WIDTH, Section.HEIGHT*i, Section.LENGTH*j), (int) loadedPosition.x, (int) loadedPosition.y, (int) loadedPosition.z);
-			}
-		}
-		
-		for (int i = 0; i < WIDTH - Section.WIDTH; i++) {
-			for (int j = 0; j < HEIGHT; j++) {
-				for (int k = 0; k < LENGTH; k++) {
-					//blocks[i+Section.WIDTH][j][k] = blocks[i][j][k];
-				}
-			}
-		}
-		
-		for (int i = 0; i < HEIGHT / Section.HEIGHT; i++) {
-			for (int j = 0; j < LENGTH / Section.LENGTH; j++) {
-				Block[][][] section = Section.load(0, i * Section.HEIGHT, j * Section.LENGTH);
-				//paste(blocks, section, 0, i * Section.HEIGHT, j * Section.LENGTH);
-			}
-		}
-	}
-	
-	private Block[][][] subsection(int x, int y, int z) {
-		Block[][][] arr = new Block[Section.WIDTH][Section.HEIGHT][Section.LENGTH];
-		for (int i = 0; i < Section.WIDTH; i++) {
-			for (int j = 0; j < Section.HEIGHT; j++) {
-				for (int k = 0; k < Section.LENGTH; k++) {
-					arr[i][j][k] = blocks[x+i][y+j][z+k];
-				}
-			}
-		}
-		return arr;
-	}
-	
-	private void paste(Block[][][] world, Block[][][] section, int x, int y, int z) {
-		for (int i = 0; i < Section.WIDTH; i++) {
-			for (int j = 0; j < Section.HEIGHT; j++) {
-				for (int k = 0; k < Section.LENGTH; k++) {
-					world[x + i][y + j][z + k] = section[i][j][k];
-				}
-			}
-		}
-	}
-	
-	private void loadSectionRight() {
+	private handleSectionLoad() {
 		
 	}
-	
-	private void loadSectionDown() {
-		
-	}
-	
-	private void loadSectionUp() {
-		
-	}
-	
-	private void loadSectionBack() {
-		
-	}
-	
-	private void loadSectionFront() {
-		
 	}
 }
