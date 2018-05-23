@@ -3,8 +3,8 @@ package Utility;
 import java.util.HashSet;
 import java.util.Set;
 
-import generator.Block;
-import generator.Entity;
+import game.Block;
+import game.Entity;
 import generator.World;
 
 public class Physics {

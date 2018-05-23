@@ -13,8 +13,8 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 import Utility.Point3;
-import generator.Block;
-import generator.Entity;
+import game.Block;
+import game.Entity;
 import generator.World;
 
 /*

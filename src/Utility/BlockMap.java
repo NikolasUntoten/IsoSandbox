@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
-import generator.Block;
+import game.Block;
 
 /*
  * Map which stores blocks in 3 dimensions, and is able to "shift" easily

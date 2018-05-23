@@ -1,4 +1,4 @@
-package generator;
+package game;
 
 import java.awt.image.BufferedImage;
 

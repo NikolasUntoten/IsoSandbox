@@ -2,7 +2,7 @@ package generator.blocks;
 
 import java.awt.Color;
 
-import generator.Block;
+import game.Block;
 
 public class Brick extends Block {
 	

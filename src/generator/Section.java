@@ -1,5 +1,6 @@
 package generator;
 
+import game.Block;
 
 public class Section {
 	

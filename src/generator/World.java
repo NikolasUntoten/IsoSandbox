@@ -6,17 +6,19 @@ import java.util.Set;
 import Utility.Physics;
 import Utility.Point3;
 import Utility.Simplex;
+import game.Block;
+import game.Entity;
 import generator.blocks.Brick;
 import generator.blocks.Grass;
 import graphics.Camera;
 
 public class World {
 
-	public static final int WIDTH = 20;
-	public static final int HEIGHT = 2;
-	public static final int LENGTH = 20;
+	public static final int WIDTH = 200;
+	public static final int HEIGHT = 20;
+	public static final int LENGTH = 200;
 
-	public Section[][][] sections;
+	public Block[][][] blocks;
 	public Set<Entity> entities;
 	public Point3 loadedPosition;
 	public Entity lockedTarget;
@@ -25,7 +27,7 @@ public class World {
 		lockedTarget = target;
 		loadedPosition = new Point3(0, 0, 0);
 
-		sections = new Section[WIDTH][HEIGHT][LENGTH];
+		blocks = new Block[WIDTH][HEIGHT][LENGTH];
 
 		entities = new HashSet<Entity>();
 		entities.add(lockedTarget);
@@ -56,12 +58,31 @@ public class World {
 		return arr;
 	}
 	
+	public Block getBlock(int x, int y, int z, Camera.Direction dir) {
+		switch (dir) {
+		case NORTH :
+			break;
+		case EAST :
+			break;
+		case SOUTH :
+			break;
+		case WEST :
+			break;
+		}
+		
+		if (x < 0 || y < 0 || z < 0 ||
+			x >= WIDTH || y >= HEIGHT || z >= LENGTH) {
+				return null;
+		}
+		return blocks[x][y][z];
+	}
+	
 	public Block getBlock(int x, int y, int z) {
 		if (x < 0 || y < 0 || z < 0 ||
 			x >= WIDTH || y >= HEIGHT || z >= LENGTH) {
 				return null;
 		}
-		Section s = sections[(int) loadedPosition.x][(int) loadedPosition.y][(int) loadedPosition.z];
+		return blocks[x][y][z];
 	}
 
 	private void generateTerrain() {
@@ -80,12 +101,5 @@ public class World {
 			// Physics.updateEntity(this, e, time);
 			Physics.updateEntitySimple(this, e, time);
 		}
-		handleSectionLoad();
-	}
-	
-	
-	private handleSectionLoad() {
-		
-	}
 	}
 }
