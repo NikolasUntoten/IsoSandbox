@@ -7,6 +7,11 @@ import javax.swing.JPanel;
  */
 
 public class Overlay extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2565717742988675922L;
+
 	public Overlay() {
 		
 	}

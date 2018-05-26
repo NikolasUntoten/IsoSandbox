@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 public class ImageUtil {
 	
 	private static HashMap<String, Image> map = new HashMap<String, Image>();
-	private static String currentDir = System.getProperty("user.dir");
 	
 	public static BufferedImage loadImage(String name) {
 		Image i;

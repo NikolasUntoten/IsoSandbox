@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ui.KeyUpdater;
-import ui.Overlay;
 
 /*
  * Initiates game, updates via loops. Should do little to nothing more than this.

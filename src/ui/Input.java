@@ -2,9 +2,6 @@ package ui;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Input {
 	

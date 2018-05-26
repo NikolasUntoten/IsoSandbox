@@ -3,21 +3,29 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+import Utility.ShiftingArray;
+
 public class Data {
-	private Block[][][] blocks;
+	
+	private ShiftingArray<Block> blocks;
+	
 	private List<Entity> entities;
 	
 	public Data() {
-		blocks = new Block[0][0][0];
+		blocks = new ShiftingArray<Block>();
 		entities = new ArrayList<Entity>();
 	}
 	
 	public Block getBlock(int x, int y, int z) {
-		return null;
+		return blocks.get(x, y, z);
 	}
 	
 	public void setBlock(Block b, int x, int y, int z) {
-		
+		blocks.set(b, x, y, z);
+	}
+	
+	public void destroyBlock(int x, int y, int z) {
+		blocks.set(null, x, y, z);
 	}
 	
 	public Entity[] getEntities() {

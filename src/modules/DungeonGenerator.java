@@ -1,8 +1,6 @@
 package modules;
 
 import java.awt.Point;
-import java.util.HashSet;
-import java.util.Set;
 
 public class DungeonGenerator {
 	
