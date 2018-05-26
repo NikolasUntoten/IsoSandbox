@@ -25,7 +25,7 @@ import graphics.Renderer;
  * is traversed starting from the top, this should not be a problem.
  */
 
-public class Camera implements Renderer {
+public class IsoRenderer implements Renderer {
 	
 	private Point3 position;
 	private int scale;
@@ -33,7 +33,7 @@ public class Camera implements Renderer {
 	
 	public enum Direction {NORTH, EAST, SOUTH, WEST};
 	
-	public Camera() {
+	public IsoRenderer() {
 		scale = 30;
 		position = new Point3(0, 0, 0);
 		direction = Direction.NORTH;
@@ -103,7 +103,6 @@ public class Camera implements Renderer {
 	private void drawWorld(Graphics g) {
 		
 		Map<Point, Set<Entity>> entities = getEntities();
-		Block[][][] blocks = world.blocks;
 		
 		for (int y = 0; y < blocks[0].length; y++) {
 			for (int z = 0; z < blocks[0][0].length; z++) {
@@ -112,7 +111,7 @@ public class Camera implements Renderer {
 					for (Entity e : temp) drawEntity(g, e, position);
 				}
 				for (int x = 0; x < blocks.length; x++) {
-					if (world.getBlock(x, y, z, direction) != null && !blocked(x, y, z))
+					if (world.getBlock(x, y, z) != null && !blocked(x, y, z))
 						drawBlock(g, x, y, z, position);
 				}
 				
