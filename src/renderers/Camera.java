@@ -14,8 +14,9 @@ import javax.swing.JPanel;
 
 import Utility.Point3;
 import data.Block;
+import data.Data;
 import data.Entity;
-import data.World;
+import graphics.Renderer;
 
 /*
  * Renders the blocks in a given world.
@@ -24,18 +25,15 @@ import data.World;
  * is traversed starting from the top, this should not be a problem.
  */
 
-public class Camera extends JPanel {
+public class Camera implements Renderer {
 	
 	private Point3 position;
 	private int scale;
-	private World world;
 	private Direction direction;
 	
 	public enum Direction {NORTH, EAST, SOUTH, WEST};
 	
-	public Camera(World w) {
-		super();
-		world = w;
+	public Camera() {
 		scale = 30;
 		position = new Point3(0, 0, 0);
 		direction = Direction.NORTH;
@@ -83,29 +81,26 @@ public class Camera extends JPanel {
 		}
 	}
 	
-	public void setPosition(Point3 point) {
-		position = new Point3(point.x - getWidth()/(scale*2), point.y, point.z - getHeight()/(scale*2));
-	}
-	
 	public void setPosition(int x, int y, int z) {
 		position = new Point3(x, y, z);
 	}
 	
 	@Override
-	public void paintComponent(Graphics g) {
+	public BufferedImage render(Data data, int width, int height) {
 		long startTime = System.currentTimeMillis();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics g = image.getGraphics();
 		
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, width, height);
 		drawWorld(g);
 		
 		g.setColor(Color.BLACK);
 		g.drawString("Render Time: " + (System.currentTimeMillis() - startTime), 15, 15);
+		return null;
 	}
 	
 	private void drawWorld(Graphics g) {
-		Point3 wPos = world.loadedPosition;
-		Point3 relativePos = new Point3(position.x - wPos.x, position.y - wPos.y, position.z - wPos.z);
 		
 		Map<Point, Set<Entity>> entities = getEntities();
 		Block[][][] blocks = world.blocks;
@@ -114,11 +109,11 @@ public class Camera extends JPanel {
 			for (int z = 0; z < blocks[0][0].length; z++) {
 				Set<Entity> temp = entities.get(new Point(y, z));
 				if (temp != null) {
-					for (Entity e : temp) drawEntity(g, e, relativePos);
+					for (Entity e : temp) drawEntity(g, e, position);
 				}
 				for (int x = 0; x < blocks.length; x++) {
 					if (world.getBlock(x, y, z, direction) != null && !blocked(x, y, z))
-						drawBlock(g, x, y, z, relativePos);
+						drawBlock(g, x, y, z, position);
 				}
 				
 			}

@@ -1,20 +1,13 @@
 package ui;
 
-import java.awt.image.BufferedImage;
-
-import data.Data;
-import game.Module;
+import javax.swing.JPanel;
 
 /*
  * Returns overlay of various UI elements from all modules
  */
 
-public class Overlay {
+public class Overlay extends JPanel {
 	public Overlay() {
 		
-	}
-	
-	public BufferedImage render(Data data, Module[] modules) {
-		return null;
 	}
 }

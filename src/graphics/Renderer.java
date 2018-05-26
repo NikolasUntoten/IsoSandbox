@@ -9,5 +9,5 @@ import data.Data;
  */
 
 public interface Renderer {
-	public BufferedImage render(Data data);
+	public BufferedImage render(Data data, int width, int height);
 }

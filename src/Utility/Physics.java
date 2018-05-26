@@ -1,20 +1,17 @@
 package Utility;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import data.Block;
+import data.Data;
 import data.Entity;
-import data.World;
 
 public class Physics {
 	
-	public static World world;
+	public static Data data;
 	public static final double GRAVITY = 1;
 	
-	public static void updateEntitySimple(World w, Entity e, double time) {
+	public static void updateEntitySimple(Data d, Entity e, double time) {
 		
-		world = w;
+		data = d;
 		
 		Point3 newPos = new Point3(e.position.x, e.position.y, e.position.z);
 		e.velocity.y -= GRAVITY;
@@ -38,8 +35,6 @@ public class Physics {
 		}
 		
 		e.position = newPos;
-		
-		//System.out.println(e.position);
 	}
 	
 	private static boolean blocked(Entity e, Point3 pos) {
@@ -54,18 +49,12 @@ public class Physics {
 					int tempx = (int) (x + pos.x - e.size.x/2);
 					int tempy = (int) (y + pos.y - e.size.y/2);
 					int tempz = (int) (z + pos.z - e.size.z/2);
-					if (withinBounds(tempx, tempy, tempz)) {
-						if (world.blocks[tempx][tempy][tempz] != null) {
-							return true;
-						}
+					if (data.getBlock(tempx, tempy, tempz) != null) {
+						return true;
 					}
 				}
 			}
 		}
 		return false;
-	}
-	
-	private static boolean withinBounds(int x, int y, int z) {
-		return x >= 0 && y >= 0 && z >= 0 && x < world.WIDTH && y < world.HEIGHT && z < world.LENGTH;
 	}
 }

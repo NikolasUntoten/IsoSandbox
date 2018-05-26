@@ -11,8 +11,6 @@ public class App {
 	
 	private Renderer renderer;
 	
-	private Overlay overlay;
-	
 	private AppWindow window;
 	
 	private Module[] modules;
@@ -25,28 +23,35 @@ public class App {
 		modules = initModules;
 		renderer = initRenderer;
 		data = new Data();
-		overlay = new Overlay();
 		window = new AppWindow();
 		
 		isRunning = true;
 		
-		initialize();
-		loop();
+		initializeModules();
+		startGameLoop();
 	}
 	
+	//Shuts the game down
 	public static void Stop() {
 		isRunning = false;
 	}
 	
-	//runs initialization of all modules
-	private void initialize() {
+	//runs initialization of all modules, as well as initializing overlays
+	//most have 2 loops, to ensure full initialization of data before overlays are initialized
+	private void initializeModules() {
 		for (Module m : modules) {
 			m.initialize(data);
+		}
+		for (Module m : modules) {
+			Overlay ov = m.getOverlay(data);
+			if (ov != null) {
+				window.add(ov);
+			}
 		}
 	}
 	
 	//initializes game loop in a thread
-	private void loop() {
+	private void startGameLoop() {
 		new Thread() {
 			@Override
 			public void run() {
@@ -72,6 +77,6 @@ public class App {
 		for (Module m : modules) {
 			m.update(data);
 		}
-		window.refresh(renderer.render(data), overlay.render(data, modules));
+		window.refresh(renderer.render(data, window.getWidth(), window.getHeight()));
 	}
 }
