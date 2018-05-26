@@ -1,4 +1,4 @@
-package graphics;
+package renderers;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,9 +13,9 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 import Utility.Point3;
-import game.Block;
-import game.Entity;
-import generator.World;
+import data.Block;
+import data.Entity;
+import data.World;
 
 /*
  * Renders the blocks in a given world.

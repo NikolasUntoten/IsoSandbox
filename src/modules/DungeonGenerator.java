@@ -1,10 +1,8 @@
-package generator;
+package modules;
 
 import java.awt.Point;
 import java.util.HashSet;
 import java.util.Set;
-
-import generator.blocks.Stone;
 
 public class DungeonGenerator {
 	
@@ -13,7 +11,7 @@ public class DungeonGenerator {
 	
 	private static int MaxDensity;
 	
-	public static void generate2D(World w, int width, int height, int length, int density) {
+	public static void generate2D(int width, int height, int length, int density) {
 		boolean[][][] blocks = new boolean[width][height][length];
 		MaxDensity = density;
 		new Room(width/2, 0, length/2, rand(ROOM_SIZE,1) + 2, height, rand(ROOM_SIZE,1) + 2, 4, blocks, 0);
@@ -22,7 +20,7 @@ public class DungeonGenerator {
 			for (int y = 0; y < height; y++) {
 				for (int z = 0; z < length; z++) {
 					if (!blocks[x][y][z])
-						w.blocks[x][y][z] = new Stone();
+						;//w.blocks[x][y][z] = new Stone(); TODO
 				}
 			}
 		}

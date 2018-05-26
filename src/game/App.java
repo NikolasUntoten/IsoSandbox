@@ -1,5 +1,6 @@
 package game;
 
+import data.Data;
 import graphics.AppWindow;
 import graphics.Renderer;
 import ui.Overlay;

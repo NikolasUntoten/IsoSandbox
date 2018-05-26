@@ -2,7 +2,7 @@ package ui;
 
 import java.awt.image.BufferedImage;
 
-import game.Data;
+import data.Data;
 import game.Module;
 
 /*

@@ -1,8 +1,8 @@
-package generator.blocks;
+package modules;
 
 import java.awt.Color;
 
-import game.Block;
+import data.Block;
 
 public class Grass extends Block {
 	

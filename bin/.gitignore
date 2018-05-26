@@ -1,7 +1,8 @@
-/Utility/
 /generator/
-/graphics/
-/ui/
-/resources/
-/game/
 /modules/
+/Utility/
+/data/
+/graphics/
+/game/
+/ui/
+/renderers/
