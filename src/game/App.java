@@ -1,29 +1,48 @@
 package game;
 
+import javax.swing.JFrame;
+
 import data.Data;
-import graphics.AppWindow;
+import graphics.GamePanel;
 import graphics.Renderer;
+import graphics.SetupPanel;
 import ui.Overlay;
 
 public class App {
 	
 	public static final long WORLD_TICK = 20;
 	
-	private Renderer renderer;
+	private static Renderer renderer;
 	
-	private AppWindow window;
+	private static JFrame frame;
 	
-	private Module[] modules;
+	private static GamePanel window;
 	
-	private Data data;
+	private static Module[] modules;
+	
+	private static Data data;
 	
 	private static boolean isRunning;
 	
-	public App(Module[] initModules, Renderer initRenderer) {
+	public static void main(String[] args) {
+		frame = new JFrame("RPG");
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(0, 0, 300, 300);
+		
+		SetupPanel setup = new SetupPanel();
+		frame.add(setup);
+	}
+	
+	public static void finishSetup(Module[] initModules, Renderer initRenderer, SetupPanel setup) {
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.remove(setup);
+		
+		
 		modules = initModules;
 		renderer = initRenderer;
 		data = new Data();
-		window = new AppWindow();
+		window = new GamePanel();
 		
 		isRunning = true;
 		
@@ -38,7 +57,7 @@ public class App {
 	
 	//runs initialization of all modules, as well as initializing overlays
 	//most have 2 loops, to ensure full initialization of data before overlays are initialized
-	private void initializeModules() {
+	private static void initializeModules() {
 		for (Module m : modules) {
 			m.initialize(data);
 		}
@@ -51,7 +70,7 @@ public class App {
 	}
 	
 	//initializes game loop in a thread
-	private void startGameLoop() {
+	private static void startGameLoop() {
 		new Thread() {
 			@Override
 			public void run() {
@@ -61,7 +80,7 @@ public class App {
 	}
 
 	//game loop that is run from thread
-	private void refreshLoop() {
+	private static void refreshLoop() {
 		while (isRunning) {
 			refresh();
 			try {
@@ -73,7 +92,7 @@ public class App {
 	}
 	
 	//set of methods run every refresh
-	private void refresh() {
+	private static void refresh() {
 		for (Module m : modules) {
 			m.update(data);
 		}

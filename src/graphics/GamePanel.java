@@ -12,7 +12,7 @@ import ui.KeyUpdater;
 /*
  * Initiates game, updates via loops. Should do little to nothing more than this.
  */
-public class AppWindow extends JFrame {
+public class GamePanel extends JPanel {
 
 	/**
 	 * 
@@ -21,15 +21,9 @@ public class AppWindow extends JFrame {
 	
 	private BufferedImage frame;
 
-	public AppWindow() {
-		super("RPG");
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
+	public GamePanel() {
 		
-		this.add(new Panel());
-		
-		frame = new BufferedImage(0, 0, BufferedImage.TYPE_INT_ARGB);
+		frame = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 		
 		KeyListener k = new KeyUpdater();
 		this.addKeyListener(k);
@@ -42,16 +36,9 @@ public class AppWindow extends JFrame {
 		this.repaint();
 	}
 	
-	class Panel extends JPanel {
-		
-		public Panel() {
-			
-		}
-		
-		@Override
-		public void paintComponent(Graphics g) {
-			//TODO make it so that image scaling centers on center of image
-			g.drawImage(frame, 0, 0, null);
-		}
+	@Override
+	public void paintComponent(Graphics g) {
+		//TODO make it so that image scaling centers on center of image
+		g.drawImage(frame, 0, 0, null);
 	}
 }

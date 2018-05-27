@@ -1,3 +1,4 @@
 --Figure out how overlays are gonna overlay
 --Rewrite renderer to fit rework
 --dynamically load modules
+--Make setup panel
