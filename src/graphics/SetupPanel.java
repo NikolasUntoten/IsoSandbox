@@ -3,13 +3,19 @@ package graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.ServiceLoader;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
+import Utility.Loader;
+import data.Data;
 import game.App;
 import game.Module;
+import ui.Overlay;
 
 public class SetupPanel extends JPanel {
 
@@ -18,7 +24,7 @@ public class SetupPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 3624770630284325178L;
 	
-	private Module[] modules;
+	private Map<Module, Boolean> modules;
 	
 	private Renderer renderer;
 
@@ -26,7 +32,6 @@ public class SetupPanel extends JPanel {
 		
 		this.setLayout(new GridLayout());
 		
-		findModules();
 		findRenderers();
 		
 		addRendererSelector();
@@ -35,7 +40,10 @@ public class SetupPanel extends JPanel {
 	}
 	
 	private void findModules() {
-		
+		ServiceLoader<Module> loader = Loader.getLoader(Module.class);
+		for (Module m : loader) {
+			modules.put(m, false);
+		}
 	}
 	
 	private void findRenderers() {
@@ -47,14 +55,20 @@ public class SetupPanel extends JPanel {
 	}
 	
 	private void addModuleBoxes() {
-		JCheckBox box1 = new JCheckBox("Test Box");
-		box1.addActionListener(new ActionListener() {
+		for (Module m : modules.keySet()) {
+			this.add(createModuleBox(m));
+		}
+	}
+	
+	private JCheckBox createModuleBox(Module module) {
+		JCheckBox box = new JCheckBox(module.toString());
+		box.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				box1.isSelected();
+				modules.put(module, box.isSelected());
 			}
 		});
-		this.add(box1);
+		return box;
 	}
 	
 	private void addFinishButton() {
@@ -64,7 +78,7 @@ public class SetupPanel extends JPanel {
 		finish.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				App.finishSetup(modules, renderer, panel);
+				App.finishSetup(modules.keySet().toArray(new Module[0]), renderer, panel); //TODO clean this up
 			}
 		});
 		this.add(finish);
