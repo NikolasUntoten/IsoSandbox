@@ -1,8 +1,8 @@
 package modules;
 
-import data.Data;
-import game.Module;
-import ui.Overlay;
+import core.Data;
+import core.templates.Module;
+import core.ui.Overlay;
 
 public class Test implements Module {
 
@@ -28,6 +28,10 @@ public class Test implements Module {
 	public void updateOverlay(Data data) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String toString() {
+		return "Test";
 	}
 
 }

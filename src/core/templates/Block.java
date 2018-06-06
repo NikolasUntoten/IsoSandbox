@@ -1,4 +1,4 @@
-package data;
+package core.templates;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;

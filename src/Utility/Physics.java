@@ -1,7 +1,7 @@
 package Utility;
 
-import data.Data;
-import data.Entity;
+import core.Data;
+import core.templates.Entity;
 
 public class Physics {
 	

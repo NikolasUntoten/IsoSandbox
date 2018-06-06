@@ -1,12 +1,12 @@
-package game;
+package core;
 
 import javax.swing.JFrame;
 
-import data.Data;
-import graphics.GamePanel;
-import graphics.Renderer;
-import graphics.SetupPanel;
-import ui.Overlay;
+import core.templates.Module;
+import core.templates.Renderer;
+import core.ui.GamePanel;
+import core.ui.Overlay;
+import core.ui.SetupPanel;
 
 public class App {
 	
@@ -32,6 +32,9 @@ public class App {
 		
 		SetupPanel setup = new SetupPanel();
 		frame.add(setup);
+		
+		frame.validate();
+		frame.repaint();
 	}
 	
 	public static void finishSetup(Module[] initModules, Renderer initRenderer, SetupPanel setup) {

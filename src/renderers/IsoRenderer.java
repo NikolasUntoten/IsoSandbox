@@ -13,10 +13,10 @@ import java.util.Stack;
 import javax.swing.JPanel;
 
 import Utility.Point3;
-import data.Block;
-import data.Data;
-import data.Entity;
-import graphics.Renderer;
+import core.Data;
+import core.templates.Block;
+import core.templates.Entity;
+import core.templates.Renderer;
 
 /*
  * Renders the blocks in a given world.

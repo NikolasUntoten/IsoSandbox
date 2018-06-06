@@ -1,9 +1,11 @@
-package data;
+package core;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Utility.ShiftingArray;
+import core.templates.Block;
+import core.templates.Entity;
 
 public class Data {
 	

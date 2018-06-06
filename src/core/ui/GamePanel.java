@@ -1,4 +1,4 @@
-package graphics;
+package core.ui;
 
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
@@ -6,8 +6,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import ui.KeyUpdater;
 
 /*
  * Initiates game, updates via loops. Should do little to nothing more than this.

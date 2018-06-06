@@ -3,7 +3,7 @@ package Utility;
 import java.util.ArrayList;
 import java.util.ServiceLoader;
 
-import game.Module;
+import core.templates.Module;
 
 public class Loader {
 	

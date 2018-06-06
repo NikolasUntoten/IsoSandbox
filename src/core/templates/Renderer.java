@@ -1,8 +1,8 @@
-package graphics;
+package core.templates;
 
 import java.awt.image.BufferedImage;
 
-import data.Data;
+import core.Data;
 
 /*
  * Returns an image of the given data set

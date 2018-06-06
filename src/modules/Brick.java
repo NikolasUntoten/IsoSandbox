@@ -2,7 +2,7 @@ package modules;
 
 import java.awt.Color;
 
-import data.Block;
+import core.templates.Block;
 
 public class Brick extends Block {
 	

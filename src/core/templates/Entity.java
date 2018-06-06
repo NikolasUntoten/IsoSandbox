@@ -1,4 +1,4 @@
-package data;
+package core.templates;
 
 import java.awt.image.BufferedImage;
 

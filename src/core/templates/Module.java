@@ -1,7 +1,7 @@
-package game;
+package core.templates;
 
-import data.Data;
-import ui.Overlay;
+import core.Data;
+import core.ui.Overlay;
 
 public interface Module {
 	
